@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,12 +29,12 @@
         }
 
         .card {
-            max-width: 650px;
+            max-width: 750px;
             width: 100%;
             padding: 60px 30px;
-            background: rgba(255,255,255,0.9);
+            background: rgba(255, 255, 255, 0.9);
             border-radius: 25px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
         }
 
         .rings {
@@ -83,248 +84,332 @@
         #zdjecia {
             display: none;
         }
+
+        #galeria {
+            margin-top: 55px;
+        }
+
+        #zdjecia-galeria {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 18px;
+            margin-top: 30px;
+        }
+
+        .kafelek {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #eee;
+            aspect-ratio: 1 / 1;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .kafelek img,
+        .kafelek video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .kafelek img {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .kafelek img:hover {
+            transform: scale(1.04);
+        }
+
+        @media (max-width: 600px) {
+
+            .hero {
+                padding: 15px;
+            }
+
+            .card {
+                padding: 40px 18px;
+            }
+
+            h1 {
+                font-size: 34px;
+            }
+
+            #zdjecia-galeria {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 
 <body>
 
-<section class="hero">
+    <section class="hero">
 
-    <div class="card">
+        <div class="card">
 
-        <div class="rings">💍</div>
+            <div class="rings">💍</div>
 
-        <h1>Julia & Kamil</h1>
+            <h1>Julia & Kamil</h1>
 
-        <h2>Wspomnienia z naszego wesela</h2>
+            <h2>Wspomnienia z naszego wesela</h2>
 
-        <p>
-            Pokażcie nam ten wyjątkowy dzień
-            swoimi oczami. ❤️
-            <br><br>
-            Dodajcie swoje zdjęcia i pomóżcie nam
-            zachować te piękne chwile na zawsze.
-        </p>
+            <p>
+                Pokażcie nam ten wyjątkowy dzień swoimi oczami. ❤️
+                <br><br>
+                Dodajcie swoje zdjęcia i filmiki i pomóżcie nam
+                zachować te piękne chwile na zawsze.
+            </p>
 
-        <input
-    type="file"
-    id="zdjecia"
-    accept="image/*,video/*"
-    multiple
->
+            <input
+                type="file"
+                id="zdjecia"
+                accept="image/*,video/*"
+                multiple
+            >
 
-        <button
-            class="button"
-            onclick="document.getElementById('zdjecia').click()"
-        >
-            📸 Dodaj zdjęcia
-        </button>
+            <button
+                class="button"
+                onclick="document.getElementById('zdjecia').click()"
+            >
+                📸 Dodaj zdjęcia i filmy
+            </button>
 
-        <div class="date">
-            Z miłością, Julia & Kamil
+            <div class="date">
+                Z miłością, Julia & Kamil
+            </div>
+
+            <div id="galeria">
+
+                <h2>Nasze wspólne wspomnienia ❤️</h2>
+
+                <div id="zdjecia-galeria"></div>
+
+            </div>
+
         </div>
-        <div id="galeria" style="margin-top: 50px;">
-    <h2>Nasze wspólne wspomnienia ❤️</h2>
 
-    <div
-    id="zdjecia-galeria"
-    style="
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 18px;
-        margin-top: 30px;
-    "
->
-</div>
+    </section>
 
-    </div>
+    <script>
 
-</section>
+        const SUPABASE_URL =
+            'https://woejarxmyeinwacaqpgd.supabase.co';
 
-<script>
+        const SUPABASE_KEY =
+            'sb_publishable_-cVU1wV84GZnUsdKdWVPsQ_26zo1EC7';
 
-const SUPABASE_URL = 'https://woejarxmyeinwacaqpgd.supabase.co';
 
-/*
-    WAŻNE:
-    Wklej tutaj swój obecny Publishable key.
-    Nie wysyłaj mi go w wiadomości.
-*/
-const SUPABASE_KEY = 'sb_publishable_-cVU1wV84GZnUsdKdWVPsQ_26zo1EC7';
+        /* ==============================
+           WYSYŁANIE ZDJĘĆ I FILMÓW
+        ============================== */
 
-const zdjecia = document.getElementById('zdjecia');
+        const zdjecia =
+            document.getElementById('zdjecia');
 
-zdjecia.addEventListener('change', async function () {
+        zdjecia.addEventListener('change', async function () {
 
-    const pliki = zdjecia.files;
+            const pliki = zdjecia.files;
 
-    if (!pliki.length) {
-        return;
-    }
-
-    alert('📸 Rozpoczynam wysyłanie zdjęć...');
-
-    for (const plik of pliki) {
-
-        const nazwaPliku =
-            Date.now() + '-' +
-            Math.random().toString(36).substring(2) + '-' +
-            plik.name;
-
-        try {
-
-            const odpowiedz = await fetch(
-                SUPABASE_URL +
-                '/storage/v1/object/zdjecia-z-wesela/' +
-                encodeURIComponent(nazwaPliku),
-                {
-                    method: 'POST',
-
-                    headers: {
-                        'apikey': SUPABASE_KEY,
-                        'Authorization': 'Bearer ' + SUPABASE_KEY,
-                        'Content-Type': plik.type || 'application/octet-stream'
-                    },
-
-                    body: plik
-                }
-            );
-
-            if (!odpowiedz.ok) {
-
-                const blad = await odpowiedz.text();
-
-                console.error(blad);
-
-                alert('❌ Nie udało się wysłać zdjęcia.');
-
+            if (!pliki.length) {
                 return;
             }
 
-        } catch (blad) {
+            alert('📸 Rozpoczynam wysyłanie zdjęć i filmów...');
 
-            console.error(blad);
+            for (const plik of pliki) {
 
-            alert('❌ Wystąpił problem podczas wysyłania zdjęcia.');
+                const nazwaPliku =
+                    Date.now() +
+                    '-' +
+                    Math.random().toString(36).substring(2) +
+                    '-' +
+                    plik.name;
 
-            return;
-        }
-    }
+                try {
 
-    alert('❤️ Zdjęcia zostały wysłane!');
+                    const odpowiedz = await fetch(
 
-    zdjecia.value = '';
+                        SUPABASE_URL +
+                        '/storage/v1/object/zdjecia-z-wesela/' +
+                        encodeURIComponent(nazwaPliku),
 
-});
-const galeria = document.getElementById('zdjecia-galeria');
+                        {
+                            method: 'POST',
 
-async function pokazGalerie() {
+                            headers: {
+                                'apikey': SUPABASE_KEY,
+                                'Authorization': 'Bearer ' + SUPABASE_KEY,
+                                'Content-Type':
+                                    plik.type || 'application/octet-stream'
+                            },
 
-    try {
+                            body: plik
+                        }
+                    );
 
-        const odpowiedz = await fetch(
-            SUPABASE_URL +
-            '/storage/v1/object/list/zdjecia-z-wesela',
-            {
-                method: 'POST',
+                    if (!odpowiedz.ok) {
 
-                headers: {
-                    'apikey': SUPABASE_KEY,
-                    'Authorization': 'Bearer ' + SUPABASE_KEY,
-                    'Content-Type': 'application/json'
-                },
+                        const blad =
+                            await odpowiedz.text();
 
-                body: JSON.stringify({
-                    prefix: '',
-                    limit: 100,
-                    offset: 0
-                })
+                        console.error(blad);
+
+                        alert(
+                            '❌ Nie udało się wysłać jednego z plików.'
+                        );
+
+                        return;
+                    }
+
+                } catch (blad) {
+
+                    console.error(blad);
+
+                    alert(
+                        '❌ Wystąpił problem podczas wysyłania.'
+                    );
+
+                    return;
+                }
             }
-        );
 
-        const dane = await odpowiedz.json();
+            alert('❤️ Zdjęcia i filmy zostały wysłane!');
 
-        console.log('Odpowiedź Supabase:', dane);
+            zdjecia.value = '';
 
-        if (!odpowiedz.ok) {
-            console.error('Błąd Supabase:', dane);
-            return;
+            pokazGalerie();
+        });
+
+
+        /* ==============================
+           GALERIA
+        ============================== */
+
+        const galeria =
+            document.getElementById('zdjecia-galeria');
+
+        async function pokazGalerie() {
+
+            try {
+
+                const odpowiedz = await fetch(
+
+                    SUPABASE_URL +
+                    '/storage/v1/object/list/zdjecia-z-wesela',
+
+                    {
+                        method: 'POST',
+
+                        headers: {
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': 'Bearer ' + SUPABASE_KEY,
+                            'Content-Type': 'application/json'
+                        },
+
+                        body: JSON.stringify({
+                            prefix: '',
+                            limit: 100,
+                            offset: 0
+                        })
+                    }
+                );
+
+                const dane =
+                    await odpowiedz.json();
+
+                if (!odpowiedz.ok) {
+
+                    console.error(
+                        'Błąd Supabase:',
+                        dane
+                    );
+
+                    galeria.innerHTML =
+                        '<p>Nie udało się załadować galerii.</p>';
+
+                    return;
+                }
+
+                galeria.innerHTML = '';
+
+                if (!dane.length) {
+
+                    galeria.innerHTML =
+                        '<p>Na razie nie ma jeszcze wspomnień ❤️</p>';
+
+                    return;
+                }
+
+                dane.forEach(function (plik) {
+
+                    const adres =
+                        SUPABASE_URL +
+                        '/storage/v1/object/public/zdjecia-z-wesela/' +
+                        encodeURIComponent(plik.name);
+
+                    const kontener =
+                        document.createElement('div');
+
+                    kontener.className = 'kafelek';
+
+                    const nazwa =
+                        plik.name.toLowerCase();
+
+                    const czyFilm =
+                        nazwa.endsWith('.mp4') ||
+                        nazwa.endsWith('.mov') ||
+                        nazwa.endsWith('.webm') ||
+                        nazwa.endsWith('.m4v');
+
+                    if (czyFilm) {
+
+                        const film =
+                            document.createElement('video');
+
+                        film.src = adres;
+                        film.controls = true;
+                        film.playsInline = true;
+                        film.preload = 'metadata';
+
+                        kontener.appendChild(film);
+
+                    } else {
+
+                        const obrazek =
+                            document.createElement('img');
+
+                        obrazek.src = adres;
+                        obrazek.loading = 'lazy';
+
+                        obrazek.onclick = function () {
+                            window.open(adres, '_blank');
+                        };
+
+                        kontener.appendChild(obrazek);
+                    }
+
+                    galeria.appendChild(kontener);
+                });
+
+            } catch (blad) {
+
+                console.error(
+                    'Błąd galerii:',
+                    blad
+                );
+
+                galeria.innerHTML =
+                    '<p>Nie udało się załadować galerii.</p>';
+            }
         }
 
-       galeria.innerHTML = '';
+        pokazGalerie();
 
-if (!dane.length) {
-    galeria.innerHTML =
-        '<p>Na razie nie ma jeszcze zdjęć ❤️</p>';
-    return;
-}
-
-dane.forEach(function (plik) {
-
-    const adres =
-        SUPABASE_URL +
-        '/storage/v1/object/public/zdjecia-z-wesela/' +
-        encodeURIComponent(plik.name);
-
-    const kontener = document.createElement('div');
-
-    kontener.style.position = 'relative';
-    kontener.style.overflow = 'hidden';
-    kontener.style.borderRadius = '18px';
-    kontener.style.background = '#eee';
-    kontener.style.aspectRatio = '1 / 1';
-    kontener.style.boxShadow = '0 5px 20px rgba(0,0,0,0.08)';
-
-    if (
-        plik.name.toLowerCase().endsWith('.mp4') ||
-        plik.name.toLowerCase().endsWith('.mov') ||
-        plik.name.toLowerCase().endsWith('.webm')
-    ) {
-
-        const film = document.createElement('video');
-
-        film.src = adres;
-        film.controls = true;
-        film.playsInline = true;
-
-        film.style.width = '100%';
-        film.style.height = '100%';
-        film.style.objectFit = 'cover';
-
-        kontener.appendChild(film);
-
-    } else {
-
-        const obrazek = document.createElement('img');
-
-        obrazek.src = adres;
-
-        obrazek.style.width = '100%';
-        obrazek.style.height = '100%';
-        obrazek.style.objectFit = 'cover';
-        obrazek.style.cursor = 'pointer';
-
-        obrazek.onclick = function () {
-            window.open(adres, '_blank');
-        };
-
-        kontener.appendChild(obrazek);
-    }
-
-    galeria.appendChild(kontener);
-
-});
-    } catch (blad) {
-
-        console.error('Błąd galerii:', blad);
-
-        galeria.innerHTML =
-            '<p>Nie udało się załadować galerii.</p>';
-    }
-}
-
-pokazGalerie();
-</script>
+    </script>
 
 </body>
+
 </html>
