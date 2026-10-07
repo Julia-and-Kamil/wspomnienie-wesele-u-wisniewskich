@@ -13,8 +13,7 @@
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600&family=Cormorant+SC:wght@400;500;600&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Cormorant+SC:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
 
 <style>
 
@@ -265,8 +264,8 @@ body {
         5px;
 
     font-family:
-        "Allura",
-        cursive;
+    "Pinyon Script",
+    cursive;
 
     font-size:
         clamp(
@@ -1197,52 +1196,9 @@ body {
 <section class="hero">
 
 
-<!-- POLAROIDY -->
 
 
-<div class="polaroid polaroid1">
-    <img id="heroFoto1">
-</div>
 
-
-<div class="polaroid polaroid2">
-    <img id="heroFoto2">
-</div>
-
-
-<div class="polaroid polaroid3">
-    <img id="heroFoto3">
-</div>
-
-
-<div class="polaroid polaroid4">
-    <img id="heroFoto4">
-</div>
-
-
-<!-- WIŚNIE -->
-
-
-<div class="wisnie wisnie-lewa">
-
-    <div class="wisnia"></div>
-
-    <div class="wisnia"></div>
-
-    <div class="lodyga"></div>
-
-</div>
-
-
-<div class="wisnie wisnie-prawa">
-
-    <div class="wisnia"></div>
-
-    <div class="wisnia"></div>
-
-    <div class="lodyga"></div>
-
-</div>
 
 
 <!-- GŁÓWNA KARTA -->
@@ -1970,113 +1926,6 @@ return;
 
 }
 
-
-
-/* zdjęcia do polaroidów */
-
-
-const zdjeciaHero =
-
-pliki.filter(
-
-function (
-
-plik
-
-) {
-
-
-return
-
-!czyFilm(
-
-    plik
-
-);
-
-
-}
-
-)
-
-.slice(
-
-0,
-
-4
-
-);
-
-
-
-const miejsca = [
-
-
-document.getElementById(
-
-    'heroFoto1'
-
-),
-
-
-document.getElementById(
-
-    'heroFoto2'
-
-),
-
-
-document.getElementById(
-
-    'heroFoto3'
-
-),
-
-
-document.getElementById(
-
-    'heroFoto4'
-
-)
-
-
-];
-
-
-
-zdjeciaHero.forEach(
-
-function (
-
-plik,
-
-index
-
-) {
-
-
-if (
-
-    miejsca[index]
-
-) {
-
-
-miejsca[index].src =
-
-adresPliku(
-
-    plik.name
-
-);
-
-
-}
-
-
-}
-
-);
 
 
 
