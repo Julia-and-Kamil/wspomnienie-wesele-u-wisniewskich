@@ -1875,33 +1875,9 @@ return;
 
 
 
-const pliki =
-
-dane.filter(
-
-function (
-
-plik
-
-) {
-
-
-return
-
-plik.name
-
-&&
-
-plik.name
-
-!==
-
-'.emptyFolderPlaceholder';
-
-
-}
-
-);
+const pliki = dane.filter(function (plik) {
+    return plik.name && plik.name !== '.emptyFolderPlaceholder';
+});
 
 
 
