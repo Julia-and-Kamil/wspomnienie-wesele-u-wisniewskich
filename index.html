@@ -132,6 +132,48 @@
         </div>
 
     </section>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+    const SUPABASE_URL = 'https://woejarxmyeinwacaqpgd.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_-cVU1wV84GZnUsdKdWVPsQ_26zo1EC7';
+
+    const supabase = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+    const zdjecia = document.getElementById('zdjecia');
+
+    zdjecia.addEventListener('change', async function () {
+
+        const pliki = zdjecia.files;
+
+        if (!pliki.length) {
+            return;
+        }
+
+        for (const plik of pliki) {
+
+            const nazwaPliku =
+                Date.now() + '-' +
+                Math.random().toString(36).substring(2) + '-' +
+                plik.name;
+
+            const { error } = await supabase.storage
+                .from('zdjecia-z-wesela')
+                .upload(nazwaPliku, plik);
+
+            if (error) {
+                alert('Nie udało się wysłać zdjęcia.');
+                console.error(error);
+                return;
+            }
+        }
+
+        alert('❤️ Zdjęcia zostały wysłane!');
+        zdjecia.value = '';
+    });
+</script>
 </body>
 </html>
