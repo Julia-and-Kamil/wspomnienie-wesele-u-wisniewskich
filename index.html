@@ -1697,78 +1697,18 @@ function adresPliku(nazwa) {
 
 
 
-function czyFilm(
+function czyFilm(plik) {
+    const nazwa = plik.name.toLowerCase();
 
-plik
+    const mime = plik.metadata && plik.metadata.mimetype
+        ? plik.metadata.mimetype.toLowerCase()
+        : '';
 
-) {
-
-
-const nazwa =
-
-plik.name.toLowerCase();
-
-
-
-const mime =
-
-plik.metadata
-
-&&
-
-plik.metadata.mimetype
-
-?
-
-plik.metadata.mimetype.toLowerCase()
-
-:
-
-'';
-
-
-
-return
-
-mime.startsWith(
-
-    'video/'
-
-)
-
-||
-
-nazwa.endsWith(
-
-    '.mp4'
-
-)
-
-||
-
-nazwa.endsWith(
-
-    '.mov'
-
-)
-
-||
-
-nazwa.endsWith(
-
-    '.webm'
-
-)
-
-||
-
-nazwa.endsWith(
-
-    '.m4v'
-
-);
-
-
+    return mime.startsWith('video/')
+        || nazwa.endsWith('.mp4')
+        || nazwa.endsWith('.mov')
+        || nazwa.endsWith('.webm')
+        || nazwa.endsWith('.m4v');
 }
 
 
