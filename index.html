@@ -25,17 +25,13 @@
             align-items: center;
             justify-content: center;
             padding: 30px;
-            background: linear-gradient(
-                rgba(255,255,255,0.75),
-                rgba(248,245,240,0.95)
-            );
         }
 
         .card {
             max-width: 650px;
             width: 100%;
             padding: 60px 30px;
-            background: rgba(255,255,255,0.85);
+            background: rgba(255,255,255,0.9);
             border-radius: 25px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
@@ -68,7 +64,6 @@
             padding: 16px 30px;
             background: #3d3833;
             color: white;
-            text-decoration: none;
             border: none;
             border-radius: 50px;
             font-size: 17px;
@@ -93,90 +88,123 @@
 
 <body>
 
-    <section class="hero">
+<section class="hero">
 
-        <div class="card">
+    <div class="card">
 
-            <div class="rings">💍</div>
+        <div class="rings">💍</div>
 
-            <h1>Julia & Kamil</h1>
+        <h1>Julia & Kamil</h1>
 
-            <h2>Wspomnienia z naszego wesela</h2>
+        <h2>Wspomnienia z naszego wesela</h2>
 
-            <p>
-                Pokażcie nam ten wyjątkowy dzień
-                swoimi oczami. ❤️
-                <br><br>
-                Dodajcie swoje zdjęcia i pomóżcie nam
-                zachować te piękne chwile na zawsze.
-            </p>
+        <p>
+            Pokażcie nam ten wyjątkowy dzień
+            swoimi oczami. ❤️
+            <br><br>
+            Dodajcie swoje zdjęcia i pomóżcie nam
+            zachować te piękne chwile na zawsze.
+        </p>
 
-            <input
-                type="file"
-                id="zdjecia"
-                accept="image/*"
-                multiple
-            >
+        <input
+            type="file"
+            id="zdjecia"
+            accept="image/*"
+            multiple
+        >
 
-            <button
-                class="button"
-                onclick="document.getElementById('zdjecia').click()"
-            >
-                📸 Dodaj zdjęcia
-            </button>
+        <button
+            class="button"
+            onclick="document.getElementById('zdjecia').click()"
+        >
+            📸 Dodaj zdjęcia
+        </button>
 
-            <div class="date">
-                Z miłością, Julia & Kamil
-            </div>
-
+        <div class="date">
+            Z miłością, Julia & Kamil
         </div>
 
-    </section>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
+    </div>
+
+</section>
 
 <script>
-    const SUPABASE_URL = 'https://woejarxmyeinwacaqpgd.supabase.co';
-    const SUPABASE_KEY = 'sb_publishable_-cVU1wV84GZnUsdKdWVPsQ_26zo1EC7';
-alert("Łączę z Supabase...");
-    const supabase = window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
 
-    const zdjecia = document.getElementById('zdjecia');
+const SUPABASE_URL = 'https://woejarxmyeinwacaqpgd.supabase.co';
 
-alert('Skrypt działa!');
+/*
+    WAŻNE:
+    Wklej tutaj swój obecny Publishable key.
+    Nie wysyłaj mi go w wiadomości.
+*/
+const SUPABASE_KEY = 'sb_publishable_-cVU1wV84GZnUsdKdWVPsQ_26zo1EC7';
+
+const zdjecia = document.getElementById('zdjecia');
 
 zdjecia.addEventListener('change', async function () {
 
-        const pliki = zdjecia.files;
+    const pliki = zdjecia.files;
 
-        if (!pliki.length) {
-            return;
-        }
+    if (!pliki.length) {
+        return;
+    }
 
-        for (const plik of pliki) {
+    alert('📸 Rozpoczynam wysyłanie zdjęć...');
 
-            const nazwaPliku =
-                Date.now() + '-' +
-                Math.random().toString(36).substring(2) + '-' +
-                plik.name;
+    for (const plik of pliki) {
 
-            const { error } = await supabase.storage
-                .from('zdjecia-z-wesela')
-                .upload(nazwaPliku, plik);
+        const nazwaPliku =
+            Date.now() + '-' +
+            Math.random().toString(36).substring(2) + '-' +
+            plik.name;
 
-            if (error) {
-                alert('Nie udało się wysłać zdjęcia.');
-                console.error(error);
+        try {
+
+            const odpowiedz = await fetch(
+                SUPABASE_URL +
+                '/storage/v1/object/zdjecia-z-wesela/' +
+                encodeURIComponent(nazwaPliku),
+                {
+                    method: 'POST',
+
+                    headers: {
+                        'apikey': SUPABASE_KEY,
+                        'Authorization': 'Bearer ' + SUPABASE_KEY,
+                        'Content-Type': plik.type || 'application/octet-stream'
+                    },
+
+                    body: plik
+                }
+            );
+
+            if (!odpowiedz.ok) {
+
+                const blad = await odpowiedz.text();
+
+                console.error(blad);
+
+                alert('❌ Nie udało się wysłać zdjęcia.');
+
                 return;
             }
-        }
 
-        alert('❤️ Zdjęcia zostały wysłane!');
-        zdjecia.value = '';
-    });
+        } catch (blad) {
+
+            console.error(blad);
+
+            alert('❌ Wystąpił problem podczas wysyłania zdjęcia.');
+
+            return;
+        }
+    }
+
+    alert('❤️ Zdjęcia zostały wysłane!');
+
+    zdjecia.value = '';
+
+});
+
 </script>
+
 </body>
 </html>
