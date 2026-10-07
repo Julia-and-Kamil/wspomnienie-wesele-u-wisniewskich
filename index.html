@@ -2,413 +2,2523 @@
 <html lang="pl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Wspomnienia z Wesela u Wiśniewskich</title>
+<meta charset="UTF-8">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            margin: 0;
-            font-family: Georgia, serif;
-            background: #f8f5f0;
-            color: #3d3833;
-            text-align: center;
-        }
+<title>Wspomnienia z Wesela Julii i Kamila</title>
 
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-        }
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-        .card {
-            max-width: 750px;
-            width: 100%;
-            padding: 60px 30px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 25px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
-        }
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        .rings {
-            font-size: 50px;
-            margin-bottom: 20px;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Allura&family=Cormorant+Garamond:wght@400;500;600&family=Cormorant+SC:wght@400;500;600&display=swap" rel="stylesheet">
 
-        h1 {
-            font-size: 42px;
-            font-weight: normal;
-            margin: 10px 0;
-        }
 
-        h2 {
-            font-size: 24px;
-            font-weight: normal;
-            margin: 10px 0 30px;
-        }
+<style>
 
-        p {
-            font-size: 18px;
-            line-height: 1.7;
-            margin-bottom: 35px;
-        }
+:root {
 
-        .button {
-            display: inline-block;
-            padding: 16px 30px;
-            background: #3d3833;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 17px;
-            cursor: pointer;
-        }
+    --bordo: #690b1c;
 
-        .button:hover {
-            opacity: 0.85;
-        }
+    --ciemne-bordo: #33030a;
 
-        .date {
-            margin-top: 35px;
-            font-size: 15px;
-            opacity: 0.7;
-        }
+    --wino: #851428;
 
-        #zdjecia {
-            display: none;
-        }
+    --krem: #f7efe4;
 
-        #galeria {
-            margin-top: 55px;
-        }
+    --bialy: #fffaf3;
 
-        #zdjecia-galeria {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 18px;
-            margin-top: 30px;
-        }
+    --tekst: #211916;
 
-        .kafelek {
-            position: relative;
-            overflow: hidden;
-            border-radius: 18px;
-            background: #eee;
-            aspect-ratio: 1 / 1;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-        }
+}
 
-        .kafelek img,
-        .kafelek video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
 
-        .kafelek img {
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
+* {
 
-        .kafelek img:hover {
-            transform: scale(1.04);
-        }
+    box-sizing: border-box;
 
-        @media (max-width: 600px) {
+}
 
-            .hero {
-                padding: 15px;
-            }
 
-            .card {
-                padding: 40px 18px;
-            }
+html {
 
-            h1 {
-                font-size: 34px;
-            }
+    scroll-behavior: smooth;
 
-            #zdjecia-galeria {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-        }
-    </style>
+}
+
+
+body {
+
+    margin: 0;
+
+    background:
+
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(150,20,40,0.35),
+            transparent 30%
+        ),
+
+        radial-gradient(
+            circle at 90% 10%,
+            rgba(140,10,30,0.30),
+            transparent 28%
+        ),
+
+        linear-gradient(
+            135deg,
+            #210205,
+            #610918 50%,
+            #280207
+        );
+
+    font-family:
+        "Cormorant Garamond",
+        Georgia,
+        serif;
+
+    color: var(--tekst);
+
+}
+
+
+/* =========================
+   GŁÓWNA CZĘŚĆ
+========================= */
+
+
+.hero {
+
+    position: relative;
+
+    min-height: 720px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    padding: 50px 20px;
+
+}
+
+
+/* materiał / aksamit */
+
+
+.hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.20;
+
+    background:
+
+        repeating-linear-gradient(
+
+            98deg,
+
+            transparent 0px,
+
+            transparent 45px,
+
+            rgba(255,255,255,0.10) 55px,
+
+            transparent 90px
+
+        );
+
+}
+
+
+/* =========================
+   KREMOWA KARTA
+========================= */
+
+
+.karta {
+
+    position: relative;
+
+    z-index: 5;
+
+    width: min(760px, 100%);
+
+    padding:
+
+        55px
+
+        60px
+
+        50px;
+
+    text-align: center;
+
+    background:
+
+        radial-gradient(
+            circle at 30% 15%,
+            rgba(130,80,50,0.04),
+            transparent 30%
+        ),
+
+        var(--krem);
+
+    border:
+
+        1px solid
+
+        rgba(90,50,35,0.18);
+
+    box-shadow:
+
+        0 25px 70px
+
+        rgba(0,0,0,0.35);
+
+}
+
+
+/* podwójna ramka */
+
+
+.karta::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 13px;
+
+    border:
+
+        1px solid
+
+        rgba(105,11,28,0.22);
+
+    pointer-events: none;
+
+}
+
+
+.karta::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 19px;
+
+    border:
+
+        1px solid
+
+        rgba(105,11,28,0.08);
+
+    pointer-events: none;
+
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+
+.logo {
+
+    width: 125px;
+
+    max-width: 35%;
+
+    display: block;
+
+    margin:
+
+        0 auto
+
+        8px;
+
+}
+
+
+/* =========================
+   TEKSTY
+========================= */
+
+
+.imiona {
+
+    margin:
+
+        0 0
+
+        5px;
+
+    font-family:
+        "Allura",
+        cursive;
+
+    font-size:
+        clamp(
+            62px,
+            8vw,
+            100px
+        );
+
+    font-weight: normal;
+
+    line-height: 1;
+
+    color: #17100e;
+
+}
+
+
+.podtytul {
+
+    font-family:
+        "Cormorant SC",
+        serif;
+
+    letter-spacing: 0.14em;
+
+    font-size:
+        clamp(
+            18px,
+            2vw,
+            28px
+        );
+
+    color: #49342e;
+
+}
+
+
+.ozdoba {
+
+    width: 180px;
+
+    margin:
+
+        25px auto
+
+        20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    color: var(--bordo);
+
+}
+
+
+.ozdoba::before,
+
+.ozdoba::after {
+
+    content: "";
+
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        var(--bordo);
+
+    opacity: 0.55;
+
+}
+
+
+.opis {
+
+    max-width: 640px;
+
+    margin: auto;
+
+    font-family:
+        "Cormorant SC",
+        serif;
+
+    font-size:
+        clamp(
+            17px,
+            2vw,
+            22px
+        );
+
+    line-height: 1.7;
+
+    letter-spacing: 0.04em;
+
+}
+
+
+/* =========================
+   PRZYCISK
+========================= */
+
+
+#zdjecia {
+
+    display: none;
+
+}
+
+
+.przycisk {
+
+    margin-top: 30px;
+
+    min-height: 60px;
+
+    padding:
+
+        0 34px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    color: white;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #90172d,
+
+            #650919
+
+        );
+
+    font-family:
+        "Cormorant SC",
+        serif;
+
+    font-size: 17px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.12em;
+
+    cursor: pointer;
+
+    box-shadow:
+
+        0 10px 25px
+
+        rgba(80,5,20,0.25);
+
+    transition:
+        0.2s;
+
+}
+
+
+.przycisk:hover {
+
+    transform:
+        translateY(-2px);
+
+}
+
+
+.przycisk:disabled {
+
+    opacity: 0.6;
+
+    cursor: wait;
+
+}
+
+
+.status {
+
+    min-height: 25px;
+
+    margin-top: 15px;
+
+    color: #704d47;
+
+    font-size: 16px;
+
+}
+
+
+.data {
+
+    margin-top: 17px;
+
+    color: var(--bordo);
+
+    font-family:
+        "Cormorant SC",
+        serif;
+
+    font-size: 14px;
+
+    letter-spacing: 0.18em;
+
+}
+
+
+/* =========================
+   WIŚNIE
+========================= */
+
+
+.wisnie {
+
+    position: absolute;
+
+    z-index: 6;
+
+    width: 100px;
+
+    height: 105px;
+
+}
+
+
+.wisnie-lewa {
+
+    left: 25px;
+
+    bottom: 25px;
+
+    transform:
+        rotate(-12deg);
+
+}
+
+
+.wisnie-prawa {
+
+    right: 25px;
+
+    top: 180px;
+
+    transform:
+        rotate(15deg)
+        scale(0.85);
+
+}
+
+
+.wisnia {
+
+    position: absolute;
+
+    bottom: 3px;
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+
+            circle at 35% 30%,
+
+            #db5565 0 6%,
+
+            transparent 7%
+
+        ),
+
+        radial-gradient(
+
+            circle at 40% 35%,
+
+            #ba1532,
+
+            #690919 60%,
+
+            #360108
+
+        );
+
+}
+
+
+.wisnia:first-child {
+
+    left: 8px;
+
+}
+
+
+.wisnia:nth-child(2) {
+
+    right: 8px;
+
+    bottom: 0;
+
+}
+
+
+.lodyga {
+
+    position: absolute;
+
+    top: 4px;
+
+    left: 47px;
+
+    width: 2px;
+
+    height: 68px;
+
+    background: #65702a;
+
+    transform:
+        rotate(-22deg);
+
+    transform-origin: top;
+
+}
+
+
+.lodyga::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 2px;
+
+    height: 65px;
+
+    background: #65702a;
+
+    transform:
+        rotate(45deg);
+
+    transform-origin: top;
+
+}
+
+
+/* =========================
+   POLAROIDY PO BOKACH
+========================= */
+
+
+.polaroid {
+
+    position: absolute;
+
+    z-index: 2;
+
+    width: 190px;
+
+    padding:
+
+        8px
+
+        8px
+
+        28px;
+
+    background: white;
+
+    box-shadow:
+
+        0 15px 35px
+
+        rgba(0,0,0,0.45);
+
+}
+
+
+.polaroid img {
+
+    width: 100%;
+
+    aspect-ratio: 4 / 5;
+
+    object-fit: cover;
+
+    display: block;
+
+    filter:
+        grayscale(1);
+
+}
+
+
+.polaroid1 {
+
+    left: 25px;
+
+    top: -30px;
+
+    transform:
+        rotate(-9deg);
+
+}
+
+
+.polaroid2 {
+
+    left: 65px;
+
+    bottom: -35px;
+
+    transform:
+        rotate(8deg);
+
+}
+
+
+.polaroid3 {
+
+    right: 25px;
+
+    top: -25px;
+
+    transform:
+        rotate(9deg);
+
+}
+
+
+.polaroid4 {
+
+    right: 65px;
+
+    bottom: -35px;
+
+    transform:
+        rotate(-8deg);
+
+}
+
+
+/* =========================
+   GALERIA
+========================= */
+
+
+.galeria-sekcja {
+
+    position: relative;
+
+    padding:
+
+        60px
+
+        40px
+
+        80px;
+
+    background:
+
+        radial-gradient(
+
+            circle at 0% 20%,
+
+            rgba(190,25,55,0.18),
+
+            transparent 30%
+
+        ),
+
+        radial-gradient(
+
+            circle at 100% 80%,
+
+            rgba(190,25,55,0.16),
+
+            transparent 30%
+
+        ),
+
+        linear-gradient(
+
+            180deg,
+
+            #570714,
+
+            #2b0207
+
+        );
+
+}
+
+
+.galeria-naglowek {
+
+    text-align: center;
+
+    color: #fff7ed;
+
+    margin-bottom: 40px;
+
+}
+
+
+.galeria-naglowek h2 {
+
+    margin: 0;
+
+    font-family:
+        "Cormorant SC",
+        serif;
+
+    font-size:
+        clamp(
+            28px,
+            4vw,
+            44px
+        );
+
+    font-weight: 500;
+
+    letter-spacing: 0.14em;
+
+}
+
+
+.galeria-naglowek p {
+
+    margin-top: 10px;
+
+    color: #d8bbb5;
+
+    font-size: 19px;
+
+}
+
+
+#zdjecia-galeria {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0,1fr)
+        );
+
+    gap: 20px;
+
+}
+
+
+/* zdjęcie jak polaroid */
+
+
+.kafelek {
+
+    position: relative;
+
+    padding:
+
+        8px
+
+        8px
+
+        25px;
+
+    background:
+        #fffdf9;
+
+    box-shadow:
+
+        0 15px 32px
+
+        rgba(0,0,0,0.30);
+
+    transform:
+        rotate(
+            var(--obrot)
+        );
+
+    transition:
+        transform 0.2s;
+
+}
+
+
+.kafelek:hover {
+
+    transform:
+
+        translateY(-5px)
+
+        rotate(
+            var(--obrot)
+        );
+
+}
+
+
+.media {
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    overflow: hidden;
+
+    background: #111;
+
+}
+
+
+.media img,
+
+.media video {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+}
+
+
+.media img {
+
+    cursor: zoom-in;
+
+}
+
+
+.podpis {
+
+    padding-top: 7px;
+
+    text-align: center;
+
+    color: var(--bordo);
+
+    font-family:
+        "Allura",
+        cursive;
+
+    font-size: 20px;
+
+}
+
+
+.pusta {
+
+    grid-column:
+        1 / -1;
+
+    padding: 50px;
+
+    text-align: center;
+
+    color: white;
+
+    font-size: 21px;
+
+}
+
+
+/* =========================
+   POWIĘKSZENIE ZDJĘCIA
+========================= */
+
+
+.lightbox {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 100;
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 30px;
+
+    background:
+
+        rgba(
+            20,
+            0,
+            5,
+            0.95
+        );
+
+}
+
+
+.lightbox.otwarty {
+
+    display: flex;
+
+}
+
+
+.lightbox img {
+
+    max-width: 95%;
+
+    max-height: 90vh;
+
+    object-fit: contain;
+
+}
+
+
+.zamknij {
+
+    position: absolute;
+
+    right: 25px;
+
+    top: 15px;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 45px;
+
+    cursor: pointer;
+
+}
+
+
+/* =========================
+   STOPKA
+========================= */
+
+
+.stopka {
+
+    padding-top: 40px;
+
+    text-align: center;
+
+    color: #d9bbb5;
+
+    font-family:
+        "Cormorant SC",
+        serif;
+
+    letter-spacing: 0.13em;
+
+}
+
+
+/* =========================
+   TELEFON
+========================= */
+
+
+@media(max-width: 950px) {
+
+    .polaroid {
+
+        display: none;
+
+    }
+
+
+    #zdjecia-galeria {
+
+        grid-template-columns:
+            repeat(
+                3,
+                1fr
+            );
+
+    }
+
+}
+
+
+@media(max-width: 650px) {
+
+    .hero {
+
+        padding:
+
+            12px
+
+            7px
+
+            22px;
+
+        min-height: auto;
+
+    }
+
+
+    .karta {
+
+        padding:
+
+            45px
+
+            20px
+
+            40px;
+
+    }
+
+
+    .logo {
+
+        width: 105px;
+
+    }
+
+
+    .wisnie-prawa {
+
+        display: none;
+
+    }
+
+
+    .wisnie-lewa {
+
+        left: auto;
+
+        right: 5px;
+
+        bottom: -5px;
+
+        transform:
+
+            scale(0.7)
+
+            rotate(-10deg);
+
+    }
+
+
+    .galeria-sekcja {
+
+        padding:
+
+            40px
+
+            13px
+
+            55px;
+
+    }
+
+
+    #zdjecia-galeria {
+
+        grid-template-columns:
+
+            repeat(
+
+                2,
+
+                1fr
+
+            );
+
+        gap: 12px;
+
+    }
+
+
+    .kafelek {
+
+        padding:
+
+            6px
+
+            6px
+
+            18px;
+
+    }
+
+
+    .przycisk {
+
+        width: 100%;
+
+        padding:
+
+            0
+
+            15px;
+
+        font-size: 15px;
+
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-    <section class="hero">
 
-        <div class="card">
+<section class="hero">
 
-            <div class="rings">💍</div>
 
-            <h1>Julia & Kamil</h1>
+<!-- POLAROIDY -->
 
-            <h2>Wspomnienia z naszego wesela</h2>
 
-            <p>
-                Pokażcie nam ten wyjątkowy dzień swoimi oczami. ❤️
-                <br><br>
-                Dodajcie swoje zdjęcia i filmiki i pomóżcie nam
-                zachować te piękne chwile na zawsze.
-            </p>
+<div class="polaroid polaroid1">
+    <img id="heroFoto1">
+</div>
 
-            <input
-                type="file"
-                id="zdjecia"
-                accept="image/*,video/*"
-                multiple
-            >
 
-            <button
-                class="button"
-                onclick="document.getElementById('zdjecia').click()"
-            >
-                📸 Dodaj zdjęcia i filmy
-            </button>
+<div class="polaroid polaroid2">
+    <img id="heroFoto2">
+</div>
 
-            <div class="date">
-                Z miłością, Julia & Kamil
-            </div>
 
-            <div id="galeria">
+<div class="polaroid polaroid3">
+    <img id="heroFoto3">
+</div>
 
-                <h2>Nasze wspólne wspomnienia ❤️</h2>
 
-                <div id="zdjecia-galeria"></div>
+<div class="polaroid polaroid4">
+    <img id="heroFoto4">
+</div>
 
-            </div>
 
-        </div>
+<!-- WIŚNIE -->
 
-    </section>
 
-    <script>
+<div class="wisnie wisnie-lewa">
 
-        const SUPABASE_URL =
-            'https://woejarxmyeinwacaqpgd.supabase.co';
+    <div class="wisnia"></div>
 
-        const SUPABASE_KEY =
-            'sb_publishable_-cVU1wV84GZnUsdKdWVPsQ_26zo1EC7';
+    <div class="wisnia"></div>
 
+    <div class="lodyga"></div>
 
-        /* ==============================
-           WYSYŁANIE ZDJĘĆ I FILMÓW
-        ============================== */
+</div>
 
-        const zdjecia =
-            document.getElementById('zdjecia');
 
-        zdjecia.addEventListener('change', async function () {
+<div class="wisnie wisnie-prawa">
 
-            const pliki = zdjecia.files;
+    <div class="wisnia"></div>
 
-            if (!pliki.length) {
-                return;
-            }
+    <div class="wisnia"></div>
 
-            alert('📸 Rozpoczynam wysyłanie zdjęć i filmów...');
+    <div class="lodyga"></div>
 
-            for (const plik of pliki) {
+</div>
 
-                const nazwaPliku =
-                    Date.now() +
-                    '-' +
-                    Math.random().toString(36).substring(2) +
-                    '-' +
-                    plik.name;
 
-                try {
+<!-- GŁÓWNA KARTA -->
 
-                    const odpowiedz = await fetch(
 
-                        SUPABASE_URL +
-                        '/storage/v1/object/zdjecia-z-wesela/' +
-                        encodeURIComponent(nazwaPliku),
+<div class="karta">
 
-                        {
-                            method: 'POST',
 
-                            headers: {
-                                'apikey': SUPABASE_KEY,
-                                'Authorization': 'Bearer ' + SUPABASE_KEY,
-                                'Content-Type':
-                                    plik.type || 'application/octet-stream'
-                            },
+<img
+    class="logo"
+    src="logo.png"
+    alt="Logo Julia i Kamil"
+>
 
-                            body: plik
-                        }
-                    );
 
-                    if (!odpowiedz.ok) {
+<h1 class="imiona">
 
-                        const blad =
-                            await odpowiedz.text();
+    Julia & Kamil
 
-                        console.error(blad);
+</h1>
 
-                        alert(
-                            '❌ Nie udało się wysłać jednego z plików.'
-                        );
 
-                        return;
-                    }
+<div class="podtytul">
 
-                } catch (blad) {
+    Wspomnienia z naszego wesela
 
-                    console.error(blad);
+</div>
 
-                    alert(
-                        '❌ Wystąpił problem podczas wysyłania.'
-                    );
 
-                    return;
-                }
-            }
+<div class="ozdoba">
 
-            alert('❤️ Zdjęcia i filmy zostały wysłane!');
+    ♥
 
-            zdjecia.value = '';
+</div>
 
-            pokazGalerie();
-        });
 
+<p class="opis">
 
-        /* ==============================
-           GALERIA
-        ============================== */
+    Pokażcie nam ten wyjątkowy dzień
+    swoimi oczami. ❤️
 
-        const galeria =
-            document.getElementById('zdjecia-galeria');
+    <br>
 
-        async function pokazGalerie() {
+    Dodajcie swoje zdjęcia i filmiki
+    i pomóżcie nam zachować te piękne
+    chwile na zawsze.
 
-            try {
+</p>
 
-                const odpowiedz = await fetch(
 
-                    SUPABASE_URL +
-                    '/storage/v1/object/list/zdjecia-z-wesela',
+<input
 
-                    {
-                        method: 'POST',
+    type="file"
 
-                        headers: {
-                            'apikey': SUPABASE_KEY,
-                            'Authorization': 'Bearer ' + SUPABASE_KEY,
-                            'Content-Type': 'application/json'
-                        },
+    id="zdjecia"
 
-                        body: JSON.stringify({
-                            prefix: '',
-                            limit: 100,
-                            offset: 0
-                        })
-                    }
-                );
+    accept="image/*,video/*"
 
-                const dane =
-                    await odpowiedz.json();
+    multiple
 
-                if (!odpowiedz.ok) {
+>
 
-                    console.error(
-                        'Błąd Supabase:',
-                        dane
-                    );
 
-                    galeria.innerHTML =
-                        '<p>Nie udało się załadować galerii.</p>';
+<button
 
-                    return;
-                }
+    id="przycisk"
 
-                galeria.innerHTML = '';
+    class="przycisk"
 
-                if (!dane.length) {
+    type="button"
 
-                    galeria.innerHTML =
-                        '<p>Na razie nie ma jeszcze wspomnień ❤️</p>';
+>
 
-                    return;
-                }
+📸 DODAJ ZDJĘCIA I FILMY
 
-                dane.forEach(function (plik) {
+</button>
 
-                    const adres =
-                        SUPABASE_URL +
-                        '/storage/v1/object/public/zdjecia-z-wesela/' +
-                        encodeURIComponent(plik.name);
 
-                    const kontener =
-                        document.createElement('div');
+<div
 
-                    kontener.className = 'kafelek';
+    id="status"
 
-                    const nazwa =
-                        plik.name.toLowerCase();
+    class="status"
 
-                    const czyFilm =
-                        nazwa.endsWith('.mp4') ||
-                        nazwa.endsWith('.mov') ||
-                        nazwa.endsWith('.webm') ||
-                        nazwa.endsWith('.m4v');
+></div>
 
-                    if (czyFilm) {
 
-                        const film =
-                            document.createElement('video');
+<div class="data">
 
-                        film.src = adres;
-                        film.controls = true;
-                        film.playsInline = true;
-                        film.preload = 'metadata';
+    21 · 08 · 2027
 
-                        kontener.appendChild(film);
+</div>
 
-                    } else {
 
-                        const obrazek =
-                            document.createElement('img');
+</div>
 
-                        obrazek.src = adres;
-                        obrazek.loading = 'lazy';
 
-                        obrazek.onclick = function () {
-                            window.open(adres, '_blank');
-                        };
+</section>
 
-                        kontener.appendChild(obrazek);
-                    }
 
-                    galeria.appendChild(kontener);
-                });
 
-            } catch (blad) {
+<section class="galeria-sekcja">
 
-                console.error(
-                    'Błąd galerii:',
-                    blad
-                );
 
-                galeria.innerHTML =
-                    '<p>Nie udało się załadować galerii.</p>';
-            }
-        }
+<div class="galeria-naglowek">
 
-        pokazGalerie();
 
-    </script>
+<h2>
+
+Nasze wspólne wspomnienia
+
+</h2>
+
+
+<p>
+
+Każde zdjęcie to kawałek naszej historii ♥
+
+</p>
+
+
+</div>
+
+
+<div id="zdjecia-galeria"></div>
+
+
+<div class="stopka">
+
+Z MIŁOŚCIĄ · JULIA & KAMIL · 21.08.2027
+
+</div>
+
+
+</section>
+
+
+
+<div
+
+    id="lightbox"
+
+    class="lightbox"
+
+>
+
+
+<button
+
+    id="zamknij"
+
+    class="zamknij"
+
+>
+
+×
+
+</button>
+
+
+<img
+
+    id="duzeZdjecie"
+
+    alt="Powiększone zdjęcie"
+
+>
+
+
+</div>
+
+
+
+<script>
+
+
+const SUPABASE_URL =
+
+'https://woejarxmyeinwacaqpgd.supabase.co';
+
+
+
+const SUPABASE_KEY =
+
+'sb_publishable_-cVU1wV84GZnUsdKdWVPsQ_26zo1EC7';
+
+
+
+const BUCKET =
+
+'zdjecia-z-wesela';
+
+
+
+const input =
+
+document.getElementById('zdjecia');
+
+
+
+const przycisk =
+
+document.getElementById('przycisk');
+
+
+
+const status =
+
+document.getElementById('status');
+
+
+
+const galeria =
+
+document.getElementById('zdjecia-galeria');
+
+
+
+przycisk.addEventListener(
+
+'click',
+
+function () {
+
+    input.click();
+
+}
+
+);
+
+
+
+input.addEventListener(
+
+'change',
+
+async function () {
+
+
+const pliki =
+
+Array.from(
+
+    input.files
+
+);
+
+
+if (!pliki.length) {
+
+    return;
+
+}
+
+
+przycisk.disabled = true;
+
+
+status.textContent =
+
+'Wysyłanie plików…';
+
+
+let wyslane = 0;
+
+
+
+for (
+
+    const plik
+
+    of pliki
+
+) {
+
+
+const bezpiecznaNazwa =
+
+plik.name.replace(
+
+    /[^a-zA-Z0-9._-]/g,
+
+    '_'
+
+);
+
+
+
+const nazwaPliku =
+
+Date.now()
+
++
+
+'-'
+
++
+
+Math.random()
+
+.toString(36)
+
+.substring(2,9)
+
++
+
+'-'
+
++
+
+bezpiecznaNazwa;
+
+
+
+try {
+
+
+const odpowiedz =
+
+await fetch(
+
+
+SUPABASE_URL
+
++
+
+'/storage/v1/object/'
+
++
+
+BUCKET
+
++
+
+'/'
+
++
+
+encodeURIComponent(
+
+    nazwaPliku
+
+),
+
+
+{
+
+
+method: 'POST',
+
+
+headers: {
+
+
+'apikey':
+
+SUPABASE_KEY,
+
+
+'Authorization':
+
+'Bearer '
+
++
+
+SUPABASE_KEY,
+
+
+'Content-Type':
+
+plik.type
+
+||
+
+'application/octet-stream'
+
+
+},
+
+
+body: plik
+
+
+}
+
+
+);
+
+
+
+if (
+
+    !odpowiedz.ok
+
+) {
+
+
+status.textContent =
+
+'❌ Nie udało się wysłać jednego z plików.';
+
+
+przycisk.disabled = false;
+
+
+return;
+
+
+}
+
+
+
+wyslane++;
+
+
+
+status.textContent =
+
+'Wysłano '
+
++
+
+wyslane
+
++
+
+' z '
+
++
+
+pliki.length;
+
+
+}
+
+catch (
+
+blad
+
+) {
+
+
+console.error(
+
+    blad
+
+);
+
+
+status.textContent =
+
+'❌ Wystąpił problem podczas wysyłania.';
+
+
+przycisk.disabled = false;
+
+
+return;
+
+
+}
+
+
+}
+
+
+
+status.textContent =
+
+'❤️ Gotowe! Wspomnienia są już w galerii.';
+
+
+input.value = '';
+
+
+przycisk.disabled = false;
+
+
+pokazGalerie();
+
+
+}
+
+);
+
+
+
+function adresPliku(
+
+nazwa
+
+) {
+
+
+return
+
+SUPABASE_URL
+
++
+
+'/storage/v1/object/public/'
+
++
+
+BUCKET
+
++
+
+'/'
+
++
+
+encodeURIComponent(
+
+    nazwa
+
+);
+
+
+}
+
+
+
+function czyFilm(
+
+plik
+
+) {
+
+
+const nazwa =
+
+plik.name.toLowerCase();
+
+
+
+const mime =
+
+plik.metadata
+
+&&
+
+plik.metadata.mimetype
+
+?
+
+plik.metadata.mimetype.toLowerCase()
+
+:
+
+'';
+
+
+
+return
+
+mime.startsWith(
+
+    'video/'
+
+)
+
+||
+
+nazwa.endsWith(
+
+    '.mp4'
+
+)
+
+||
+
+nazwa.endsWith(
+
+    '.mov'
+
+)
+
+||
+
+nazwa.endsWith(
+
+    '.webm'
+
+)
+
+||
+
+nazwa.endsWith(
+
+    '.m4v'
+
+);
+
+
+}
+
+
+
+async function pokazGalerie() {
+
+
+try {
+
+
+const odpowiedz =
+
+await fetch(
+
+
+SUPABASE_URL
+
++
+
+'/storage/v1/object/list/'
+
++
+
+BUCKET,
+
+
+{
+
+
+method: 'POST',
+
+
+headers: {
+
+
+'apikey':
+
+SUPABASE_KEY,
+
+
+'Authorization':
+
+'Bearer '
+
++
+
+SUPABASE_KEY,
+
+
+'Content-Type':
+
+'application/json'
+
+
+},
+
+
+body:
+
+JSON.stringify({
+
+
+prefix: '',
+
+
+limit: 100,
+
+
+offset: 0
+
+
+})
+
+
+}
+
+
+);
+
+
+
+const dane =
+
+await odpowiedz.json();
+
+
+
+if (
+
+    !odpowiedz.ok
+
+) {
+
+
+galeria.innerHTML =
+
+'<div class="pusta">Nie udało się załadować galerii.</div>';
+
+
+return;
+
+
+}
+
+
+
+const pliki =
+
+dane.filter(
+
+function (
+
+plik
+
+) {
+
+
+return
+
+plik.name
+
+&&
+
+plik.name
+
+!==
+
+'.emptyFolderPlaceholder';
+
+
+}
+
+);
+
+
+
+galeria.innerHTML = '';
+
+
+
+if (
+
+    !pliki.length
+
+) {
+
+
+galeria.innerHTML =
+
+'<div class="pusta">Tu pojawią się Wasze wspomnienia ❤️</div>';
+
+
+return;
+
+
+}
+
+
+
+/* zdjęcia do polaroidów */
+
+
+const zdjeciaHero =
+
+pliki.filter(
+
+function (
+
+plik
+
+) {
+
+
+return
+
+!czyFilm(
+
+    plik
+
+);
+
+
+}
+
+)
+
+.slice(
+
+0,
+
+4
+
+);
+
+
+
+const miejsca = [
+
+
+document.getElementById(
+
+    'heroFoto1'
+
+),
+
+
+document.getElementById(
+
+    'heroFoto2'
+
+),
+
+
+document.getElementById(
+
+    'heroFoto3'
+
+),
+
+
+document.getElementById(
+
+    'heroFoto4'
+
+)
+
+
+];
+
+
+
+zdjeciaHero.forEach(
+
+function (
+
+plik,
+
+index
+
+) {
+
+
+if (
+
+    miejsca[index]
+
+) {
+
+
+miejsca[index].src =
+
+adresPliku(
+
+    plik.name
+
+);
+
+
+}
+
+
+}
+
+);
+
+
+
+const obroty = [
+
+-1.5,
+
+0.8,
+
+-0.5,
+
+1.3,
+
+-0.9,
+
+0.5
+
+];
+
+
+
+pliki.forEach(
+
+function (
+
+plik,
+
+index
+
+) {
+
+
+const adres =
+
+adresPliku(
+
+    plik.name
+
+);
+
+
+
+const kafelek =
+
+document.createElement(
+
+    'div'
+
+);
+
+
+kafelek.className =
+
+'kafelek';
+
+
+kafelek.style.setProperty(
+
+'--obrot',
+
+obroty[
+
+    index
+
+    %
+
+    obroty.length
+
+]
+
++
+
+'deg'
+
+);
+
+
+
+const media =
+
+document.createElement(
+
+    'div'
+
+);
+
+
+media.className =
+
+'media';
+
+
+
+if (
+
+    czyFilm(
+
+        plik
+
+    )
+
+) {
+
+
+const film =
+
+document.createElement(
+
+    'video'
+
+);
+
+
+film.src = adres;
+
+
+film.controls = true;
+
+
+film.playsInline = true;
+
+
+film.preload =
+
+'metadata';
+
+
+media.appendChild(
+
+    film
+
+);
+
+
+}
+
+else {
+
+
+const obrazek =
+
+document.createElement(
+
+    'img'
+
+);
+
+
+obrazek.src = adres;
+
+
+obrazek.loading =
+
+'lazy';
+
+
+obrazek.alt =
+
+'Wspomnienie z wesela Julii i Kamila';
+
+
+
+obrazek.addEventListener(
+
+'click',
+
+function () {
+
+
+otworzZdjecie(
+
+    adres
+
+);
+
+
+}
+
+);
+
+
+media.appendChild(
+
+    obrazek
+
+);
+
+
+}
+
+
+
+const podpis =
+
+document.createElement(
+
+    'div'
+
+);
+
+
+podpis.className =
+
+'podpis';
+
+
+
+if (
+
+index % 3 === 0
+
+) {
+
+
+podpis.textContent =
+
+'Julia & Kamil';
+
+
+}
+
+else if (
+
+index % 3 === 1
+
+) {
+
+
+podpis.textContent =
+
+'21.08.2027';
+
+
+}
+
+else {
+
+
+podpis.textContent =
+
+'naszymi oczami';
+
+
+}
+
+
+
+kafelek.appendChild(
+
+    media
+
+);
+
+
+kafelek.appendChild(
+
+    podpis
+
+);
+
+
+galeria.appendChild(
+
+    kafelek
+
+);
+
+
+}
+
+);
+
+
+}
+
+catch (
+
+blad
+
+) {
+
+
+console.error(
+
+    blad
+
+);
+
+
+galeria.innerHTML =
+
+'<div class="pusta">Nie udało się załadować galerii.</div>';
+
+
+}
+
+
+}
+
+
+
+/* POWIĘKSZENIE */
+
+
+const lightbox =
+
+document.getElementById(
+
+    'lightbox'
+
+);
+
+
+const duzeZdjecie =
+
+document.getElementById(
+
+    'duzeZdjecie'
+
+);
+
+
+const zamknij =
+
+document.getElementById(
+
+    'zamknij'
+
+);
+
+
+
+function otworzZdjecie(
+
+adres
+
+) {
+
+
+duzeZdjecie.src =
+
+adres;
+
+
+lightbox.classList.add(
+
+    'otwarty'
+
+);
+
+
+}
+
+
+
+function zamknijZdjecie() {
+
+
+lightbox.classList.remove(
+
+    'otwarty'
+
+);
+
+
+duzeZdjecie.src = '';
+
+
+}
+
+
+
+zamknij.addEventListener(
+
+'click',
+
+zamknijZdjecie
+
+);
+
+
+
+lightbox.addEventListener(
+
+'click',
+
+function (
+
+e
+
+) {
+
+
+if (
+
+    e.target === lightbox
+
+) {
+
+
+zamknijZdjecie();
+
+
+}
+
+
+}
+
+);
+
+
+
+pokazGalerie();
+
+
+</script>
+
 
 </body>
 
