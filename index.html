@@ -251,37 +251,69 @@ async function pokazGalerie() {
             return;
         }
 
-        galeria.innerHTML = '';
+       galeria.innerHTML = '';
 
-        if (!dane.length) {
-            galeria.innerHTML =
-                '<p>Na razie nie ma jeszcze zdjęć ❤️</p>';
-            return;
-        }
+if (!dane.length) {
+    galeria.innerHTML =
+        '<p>Na razie nie ma jeszcze zdjęć ❤️</p>';
+    return;
+}
 
-        dane.forEach(function (plik) {
+dane.forEach(function (plik) {
 
-            const obrazek = document.createElement('img');
+    const adres =
+        SUPABASE_URL +
+        '/storage/v1/object/public/zdjecia-z-wesela/' +
+        encodeURIComponent(plik.name);
 
-            obrazek.src =
-                SUPABASE_URL +
-                '/storage/v1/object/public/zdjecia-z-wesela/' +
-                encodeURIComponent(plik.name);
+    const kontener = document.createElement('div');
 
-            obrazek.style.width = '100%';
-            obrazek.style.aspectRatio = '1 / 1';
-            obrazek.style.objectFit = 'cover';
-            obrazek.style.borderRadius = '15px';
-            obrazek.style.cursor = 'pointer';
+    kontener.style.position = 'relative';
+    kontener.style.overflow = 'hidden';
+    kontener.style.borderRadius = '18px';
+    kontener.style.background = '#eee';
+    kontener.style.aspectRatio = '1 / 1';
+    kontener.style.boxShadow = '0 5px 20px rgba(0,0,0,0.08)';
 
-            obrazek.onclick = function () {
-                window.open(obrazek.src, '_blank');
-            };
+    if (
+        plik.name.toLowerCase().endsWith('.mp4') ||
+        plik.name.toLowerCase().endsWith('.mov') ||
+        plik.name.toLowerCase().endsWith('.webm')
+    ) {
 
-            galeria.appendChild(obrazek);
+        const film = document.createElement('video');
 
-        });
+        film.src = adres;
+        film.controls = true;
+        film.playsInline = true;
 
+        film.style.width = '100%';
+        film.style.height = '100%';
+        film.style.objectFit = 'cover';
+
+        kontener.appendChild(film);
+
+    } else {
+
+        const obrazek = document.createElement('img');
+
+        obrazek.src = adres;
+
+        obrazek.style.width = '100%';
+        obrazek.style.height = '100%';
+        obrazek.style.objectFit = 'cover';
+        obrazek.style.cursor = 'pointer';
+
+        obrazek.onclick = function () {
+            window.open(adres, '_blank');
+        };
+
+        kontener.appendChild(obrazek);
+    }
+
+    galeria.appendChild(kontener);
+
+});
     } catch (blad) {
 
         console.error('Błąd galerii:', blad);
