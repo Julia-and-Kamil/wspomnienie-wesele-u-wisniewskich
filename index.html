@@ -1730,39 +1730,14 @@ pokazGalerie();
 
 
 
-function adresPliku(
-
-nazwa
-
-) {
-
-
-return
-
-SUPABASE_URL
-
-+
-
-'/storage/v1/object/public/'
-
-+
-
-BUCKET
-
-+
-
-'/'
-
-+
-
-encodeURIComponent(
-
-    nazwa
-
-);
-
-
+function adresPliku(nazwa) {
+    return SUPABASE_URL
+        + '/storage/v1/object/public/'
+        + BUCKET
+        + '/'
+        + encodeURIComponent(nazwa);
 }
+
 
 
 
